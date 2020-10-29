@@ -58,5 +58,12 @@ task allInOneJar(type: Jar) {
 	with jar
 }
 
+task copyFiles(type: Copy) {
+    from projectDir
+    into "$distsDir"
+    include 'README.md', 'plugin.json', 'tibco-ems-config.yml.sample', 'tibco-ems-definition.yml'
+}
+
 jar.enabled=false
 assemble.dependsOn "allInOneJar"
+build.dependsOn "copyFiles"
