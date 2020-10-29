@@ -17,10 +17,19 @@ public class EMSMonitorFactory {
 		}
 		String username = (String) properties.get("username");
 		String password = (String) properties.get("password");
+		
+		boolean ssl = (Boolean) properties.get("ssl");
+		String sslIdentityFile = (String) properties.get("sslIdentityFile");
+		String sslIdentityPassword = (String) properties.get("sslIdentityPassword");
+		String sslTrustedCerts = (String) properties.get("sslTrustedCerts");
+		
+		EMSServer emsServer = new EMSServer(name, host, port.intValue(), username, password);
+		emsServer.setUseSSL(ssl);
+		emsServer.setSslIdentityFile(sslIdentityFile);
+		emsServer.setSslIdentityPassword(sslIdentityPassword);
+		emsServer.setSslTrustedCerts(sslTrustedCerts);
 
-		EMSServer ems = new EMSServer(name, host, port.intValue(), username, password);
-
-		ems.setFlagIncludeDynamicQueues((Boolean) properties.get("includeDynamicQueues"));
+		emsServer.setFlagIncludeDynamicQueues((Boolean) properties.get("includeDynamicQueues"));
 
 		ArrayList<Object> qIgnores = (ArrayList<Object>) properties.get("queueIgnores");
 
@@ -30,13 +39,13 @@ public class EMSMonitorFactory {
 				if (regex != null) {
 					String val = (String) regex.get("qIgnoreRegEx");
 					if (val != null && !val.isEmpty()) {
-						ems.addToQueueIgnores(val);
+						emsServer.addToQueueIgnores(val);
 					}
 				}
 			}
 		}
 
-		ems.setFlagIncludeDynamicTopics((Boolean) properties.get("includeDynamicTopics"));
+		emsServer.setFlagIncludeDynamicTopics((Boolean) properties.get("includeDynamicTopics"));
 		/*
 		 * JSONArray tIgnores = (JSONArray) properties.get("topicIgnores"); if (tIgnores
 		 * != null) { for (int i = 0; i < tIgnores.size(); i++) { JSONObject regex =
@@ -44,7 +53,7 @@ public class EMSMonitorFactory {
 		 * regex.get("tIgnoreRegEx"); if(val != null && !val.isEmpty()) {
 		 * ems.addToTopicIgnores(val); } } } }
 		 */
-		EMSMonitor agent = new EMSMonitor(ems);
+		EMSMonitor agent = new EMSMonitor(emsServer);
 
 		return agent;
 	}

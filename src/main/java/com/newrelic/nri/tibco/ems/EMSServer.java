@@ -10,7 +10,6 @@ package com.newrelic.nri.tibco.ems;
  * 
  */
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +23,19 @@ public class EMSServer {
 	private List<String> topicIgnores;
 	private Boolean flagIncludeDynamicQueues;
 	private Boolean flagIncludeDynamicTopics;
+
+	// SSL
+	private boolean useSSL;
+	private String sslIdentityFile;
+	private String sslIdentityPassword;
+	private String sslTrustedCerts;
 	
+	private String sslCiphers = null;
+	private boolean sslDebug = false;
+	private boolean sslVerifyHost = false;
+	private boolean sslVerifyHostName = false;
+	private String sslVendor = null;
+
 	public EMSServer(String name, String host, int port, String username, String password) {
 		super();
 		this.name = name;
@@ -35,52 +46,57 @@ public class EMSServer {
 		queueIgnores = new ArrayList<String>();
 		topicIgnores = new ArrayList<String>();
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public String getHost() {
 		return host;
 	}
+
 	public int getPort() {
 		return port;
 	}
+
 	public String getEMSURL() {
 		String emsURL = null;
 		emsURL = "tcp://" + host + ":" + port;
-		return(emsURL);
+		return (emsURL);
 	}
-	
+
 	public String getUsername() {
 		return username;
 	}
+
 	public String getPassword() {
 		return password;
 	}
-	
+
 	public List<String> getQueueIgnores() {
 		return queueIgnores;
 	}
-	
+
 	public void addToQueueIgnores(String queueIgnore) {
 		queueIgnores.add(queueIgnore);
 	}
-	
+
 	public void removeFromQueueIgnores(String queueIgnore) {
 		queueIgnores.remove(queueIgnore);
 	}
-	
+
 	public List<String> getTopicIgnores() {
 		return topicIgnores;
 	}
-	
+
 	public void addToTopicIgnores(String topicIgnore) {
 		queueIgnores.add(topicIgnore);
 	}
-	
+
 	public void removeFromTopicIgnores(String topicIgnore) {
 		queueIgnores.remove(topicIgnore);
 	}
-	
+
 	public void setFlagIncludeDynamicQueues(Boolean dynQValue) {
 		flagIncludeDynamicQueues = dynQValue;
 	}
@@ -88,7 +104,7 @@ public class EMSServer {
 	public Boolean getFlagIncludeDynamicQueues() {
 		return flagIncludeDynamicQueues;
 	}
-	
+
 	public void setFlagIncludeDynamicTopics(Boolean dynTValue) {
 		flagIncludeDynamicTopics = dynTValue;
 	}
@@ -96,5 +112,77 @@ public class EMSServer {
 	public Boolean getFlagIncludeDynamicTopics() {
 		return flagIncludeDynamicTopics;
 	}
-	
+
+	public String getSslIdentityFile() {
+		return sslIdentityFile;
+	}
+
+	public void setSslIdentityFile(String sslIdentityFile) {
+		this.sslIdentityFile = sslIdentityFile;
+	}
+
+	public String getSslIdentityPassword() {
+		return sslIdentityPassword;
+	}
+
+	public void setSslIdentityPassword(String sslIdentityPassword) {
+		this.sslIdentityPassword = sslIdentityPassword;
+	}
+
+	public String getSslTrustedCerts() {
+		return sslTrustedCerts;
+	}
+
+	public void setSslTrustedCerts(String sslTrustedCerts) {
+		this.sslTrustedCerts = sslTrustedCerts;
+	}
+
+	public String getSslCiphers() {
+		return sslCiphers;
+	}
+
+	public void setSslCiphers(String sslCiphers) {
+		this.sslCiphers = sslCiphers;
+	}
+
+	public Boolean getSslDebug() {
+		return sslDebug;
+	}
+
+	public void setSslDebug(boolean sslDebug) {
+		this.sslDebug = sslDebug;
+	}
+
+	public Boolean getSslVerifyHost() {
+		return sslVerifyHost;
+	}
+
+	public void setSslVerifyHost(boolean sslVerifyHost) {
+		this.sslVerifyHost = sslVerifyHost;
+	}
+
+	public Boolean getSslVerifyHostName() {
+		return sslVerifyHostName;
+	}
+
+	public void setSslVerifyHostName(boolean sslVerifyHostName) {
+		this.sslVerifyHostName = sslVerifyHostName;
+	}
+
+	public String getSslVendor() {
+		return sslVendor;
+	}
+
+	public void setSslVendor(String sslVendor) {
+		this.sslVendor = sslVendor;
+	}
+
+	public boolean isUseSSL() {
+		return useSSL;
+	}
+
+	public void setUseSSL(boolean useSSL) {
+		this.useSSL = useSSL;
+	}
+
 }

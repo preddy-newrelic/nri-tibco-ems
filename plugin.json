@@ -2,9 +2,13 @@
 	"instances": [
 		{
     	   "name": "EMS-SERVER",
-    	   "host": "34.229.202.212",
+    	   "host": "127.0.0.1",
     	   "port": 7222,
     	   "username": "admin",
+    	   "ssl": true,
+    	   "sslIdentityFile": "",
+    	   "sslIdentityPassword": "",
+    	   "sslTrustedCerts": "",
     	   "includeDynamicQueues": true,
     	   "queueIgnores": 
     	   	[
