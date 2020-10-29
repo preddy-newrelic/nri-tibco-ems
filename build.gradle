@@ -37,6 +37,9 @@ dependencies {
 	// https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
 	compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 	
+	// https://mvnrepository.com/artifact/com.google.guava/guava
+	compile group: 'com.google.guava', name: 'guava', version: '30.0-jre'
+	
 	compile group: 'com.beust', name: 'jcommander', version: '1.72'
 	
     provided fileTree(dir: 'lib', includes: ['*.jar'])
